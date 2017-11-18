@@ -3,8 +3,6 @@ package com.ruskonert.GamblKing.connect.packet;
 import com.ruskonert.GamblKing.connect.Packet;
 import com.ruskonert.GamblKing.property.ServerProperty;
 
-import java.io.DataOutputStream;
-
 public class LoginConnectionPacket extends Packet
 {
     private String id;

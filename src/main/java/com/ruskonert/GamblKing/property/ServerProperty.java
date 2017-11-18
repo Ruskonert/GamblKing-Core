@@ -21,58 +21,35 @@ import java.io.InputStream;
  */
 public final class ServerProperty
 {
-    public static final int REGISTER_SUCCESSED_ACCOUNT = 504;
-    public static final int REGISTER_FAILED_ACCOUNT    = 505;
+    public static final int REGISTER_SUCCESSED_ACCOUNT   = 504;
+    public static final int REGISTER_FAILED_ACCOUNT      = 505;
 
-    public static final String SERVER_ADDRESS          = "127.0.0.1";
-    public static final int    SERVER_PORT             = 7743;
+    public static final String SERVER_ADDRESS            = "127.0.0.1";
+    public static final int    SERVER_PORT               = 7743;
+    public static final int    SERVER_UPDATE_PORT        = 7744;
 
 
-    public static final int CHECK_REGISTER_CONNECTION  = 440;
-    public static final int CLIENT_SERVER_REQUEST      = 614;
+    public static final int CHECK_REGISTER_CONNECTION    = 400;
+    public static final int CLIENT_SERVER_REQUEST        = 401;
 
-    public static final int REQUEST_LOGIN              = 100;
-    public static final int RECEVIED_LOGIN_SUCCESS     = 101;
-    public static final int RECEIVED_LOGIN_FAILED      = 102;
+    public static final int REQUEST_LOGIN                = 100;
+    public static final int RECEVIED_LOGIN_SUCCESS       = 101;
+    public static final int RECEIVED_LOGIN_FAILED        = 102;
 
-    public static final int CHECK_UPDATE_REQUEST       = 600;
-    public static final int CHECK_UPDATE_PROCESSING    = 601;
-    public static final int CHECK_UPDATE_FINISHED      = 602;
+    public static final int CHECK_UPDATE_REQUEST         = 600;
+    public static final int CHECK_UPDATE_PROCESSING      = 601;
+    public static final int CHECK_UPDATE_FINISHED        = 602;
 
-    public static final int SEND_UPDATE_REQURST        = 700;
+    public static final int SEND_UPDATE_REQURST          = 700;
     public static final int SEND_UPDATE_REQURST_RECEIVED = 701;
+    public static final int SEND_UPDATE_FILE_REQUEST     = 702;
+    public static final int SEND_UPDATE_FILE_REQUEST_COMPLETED = 703;
 
-    public static final int SEND_UPDATE_FILE_REQUEST   = 702;
 
-    public static final int SIGNAL_FILE_UPLOADED       = 800;
+    public static final int SIGNAL_FILE_UPLOADED         = 800;
 
-    public static final int CONNECT_GAME_SERVER        = 900;
+    public static final int CLIENT_FILE_REQUEST          = 300;
+    public static final int CLIENT_FILE_RECEIVED         = 301;
 
-    public static final File getResourceAsFile(String resourcePath)
-    {
-        try {
-            InputStream in = ClassLoader.getSystemClassLoader().getResourceAsStream(resourcePath);
-            if (in == null)
-            {
-                return null;
-            }
-
-            File tempFile = File.createTempFile(String.valueOf(in.hashCode()), ".tmp");
-            tempFile.deleteOnExit();
-
-            try (FileOutputStream out = new FileOutputStream(tempFile))
-            {
-                //copy stream
-                byte[] buffer = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = in.read(buffer)) != -1) {
-                    out.write(buffer, 0, bytesRead);
-                }
-            }
-            return tempFile;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    public static final int CONNECT_GAME_SERVER          = 900;
 }

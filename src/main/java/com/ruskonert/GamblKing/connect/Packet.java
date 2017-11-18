@@ -1,14 +1,22 @@
 package com.ruskonert.GamblKing.connect;
 
-import com.google.gson.Gson;
 import com.ruskonert.GamblKing.util.SystemUtil;
-import javafx.scene.control.Alert;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSerializer;
 
+import javafx.scene.control.Alert;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Packet
 {
+    private Map<Type, JsonSerializer<?>> jsonSerializers = new HashMap<>();
+    public Map<Type, JsonSerializer<?>> getJsonSerializers() { return this.jsonSerializers; }
+
     private int status;
     public int getStatus() { return this.status; }
 
@@ -24,7 +32,14 @@ public abstract class Packet
 
     public void send(DataOutputStream stream, Object handleInstance)
     {
-        Gson gson = new Gson();
+        GsonBuilder builder = new GsonBuilder();
+        for(Type t : jsonSerializers.keySet())
+        {
+            builder.registerTypeAdapter(t, jsonSerializers.get(t));
+        }
+
+        Gson gson = builder.create();
+
         try
         {
             stream.writeUTF(gson.toJson(handleInstance));
