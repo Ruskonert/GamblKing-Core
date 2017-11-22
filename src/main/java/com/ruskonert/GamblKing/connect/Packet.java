@@ -14,7 +14,7 @@ import java.util.Map;
 
 public abstract class Packet
 {
-    private Map<Type, JsonSerializer<?>> jsonSerializers = new HashMap<>();
+    private transient Map<Type, JsonSerializer<?>> jsonSerializers = new HashMap<>();
     public Map<Type, JsonSerializer<?>> getJsonSerializers() { return this.jsonSerializers; }
 
     private int status;
@@ -32,11 +32,12 @@ public abstract class Packet
 
     public void send(DataOutputStream stream, Object handleInstance)
     {
-        GsonBuilder builder = new GsonBuilder();
-        for(Type t : jsonSerializers.keySet())
-        {
-            builder.registerTypeAdapter(t, jsonSerializers.get(t));
-        }
+        GsonBuilder builder = new GsonBuilder().serializeNulls();
+        if(jsonSerializers.keySet().size() != 0)
+            for(Type t : jsonSerializers.keySet())
+            {
+                builder.registerTypeAdapter(t, jsonSerializers.get(t));
+            }
 
         Gson gson = builder.create();
 
@@ -46,6 +47,7 @@ public abstract class Packet
         }
         catch(NullPointerException | IOException e)
         {
+            e.printStackTrace();
             SystemUtil.Companion.alert("이벤트 핸들링 실패", "연결이 끊겨있음",
                     "서버가 닫혀있거나 연결되지 않았습니다.", Alert.AlertType.ERROR);
         }
