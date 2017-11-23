@@ -1,6 +1,7 @@
 package com.ruskonert.GamblKing.framework;
 
 import com.ruskonert.GamblKing.entity.Player;
+import com.ruskonert.GamblKing.entity.Room;
 import com.ruskonert.GamblKing.util.SecurityUtil;
 
 public class PlayerEntityFramework implements Player
@@ -34,16 +35,14 @@ public class PlayerEntityFramework implements Player
     public void setLastConnected(String lastConnected) { this.lastConnected = lastConnected; }
     @Override public String getLastConnected() { return lastConnected; }
 
+    private Room enteredRoom = null;
+    public void setEnteredRoom(Room room) { this.enteredRoom = room; }
+    @Override public Room getEnteredRoom() { return enteredRoom; }
+
     @Override
     public boolean isEnteredRoom()
     {
-        try
-        {
-            throw new RuntimeException("Not implemented");
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        }
-        return false;
+        return enteredRoom != null;
     }
 
     private String lastBattlePlayer;

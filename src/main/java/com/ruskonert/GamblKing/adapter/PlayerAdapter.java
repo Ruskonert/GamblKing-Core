@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+
 import com.ruskonert.GamblKing.entity.Player;
 import com.ruskonert.GamblKing.framework.PlayerEntityFramework;
 
@@ -25,7 +26,7 @@ public class PlayerAdapter implements JsonSerializer<Player>, JsonDeserializer<P
         entityFramework.setLastBattlePlayer(object.get("lastBattlePlayer").getAsString());
         entityFramework.setHostAddress(object.get("hostAddress").getAsString());
         entityFramework.setLastConnected(object.get("lastConnected").getAsString());
-        entityFramework.setLastConnected(object.get("password").getAsString());
+        entityFramework.setPassword(object.get("password").getAsString());
         return entityFramework;
     }
 

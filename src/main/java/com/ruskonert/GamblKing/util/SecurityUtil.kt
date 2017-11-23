@@ -46,8 +46,8 @@ class SecurityUtil
                 val file = RandomAccessFile(filename, "r")
                 val hashSum = MessageDigest.getInstance("SHA-256")
                 val buffer = ByteArray(buff)
-                var partialHash : ByteArray? = null
-                var read : Long = 0L
+                var partialHash: ByteArray?
+                var read = 0L
                 // calculate the hash of the hole file for the test
                 val offset = file.length()
                 var unitsize : Int
@@ -81,7 +81,7 @@ class SecurityUtil
             val classes = ArrayList<Class<*>>()
 
             // Get a File object for the package
-            var directory: File? = null
+            var directory: File?
             val fullPath: String
             val relPath = pkgname.replace('.', '/')
 

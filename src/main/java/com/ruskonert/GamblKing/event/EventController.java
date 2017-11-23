@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class EventController implements EventHandler
 {
     private static Map<Class<Event>, List<EventEntry<EventListener, Method>>> EVENT_HANDLER_COLLECTION = new ConcurrentHashMap<>();
+    @SuppressWarnings("unchecked")
     public static void signatureListener(EventListener listener)
     {
         EventEntry<EventListener, Method> listenerEntry = new EventEntry<>();
@@ -44,6 +45,7 @@ public final class EventController implements EventHandler
         }
     }
 
+    @SuppressWarnings("SuspiciousMethodCalls")
     public static void invokeEvent(Event eventTarget)
     {
         if(EVENT_HANDLER_COLLECTION.containsKey(eventTarget.getClass()))

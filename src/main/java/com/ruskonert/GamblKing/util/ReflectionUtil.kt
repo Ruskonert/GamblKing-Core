@@ -17,7 +17,7 @@ class ReflectionUtil
 
         fun invokeMethod(target: Any, methodName : String, vararg args : Any?) : Any?
         {
-            var met : Method? = null
+            var met : Method?
             try
             {
                 met = target.javaClass.getMethod(methodName)

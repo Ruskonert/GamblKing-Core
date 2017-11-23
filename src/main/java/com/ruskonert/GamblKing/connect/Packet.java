@@ -1,6 +1,7 @@
 package com.ruskonert.GamblKing.connect;
 
 import com.ruskonert.GamblKing.util.SystemUtil;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSerializer;
@@ -8,6 +9,7 @@ import com.google.gson.JsonSerializer;
 import javafx.scene.control.Alert;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +25,11 @@ public abstract class Packet
     public Packet(int status)
     {
         this.status = status;
+    }
+
+    public void send(OutputStream stream)
+    {
+        this.send(new DataOutputStream(stream), this);
     }
 
     public void send(DataOutputStream stream)
