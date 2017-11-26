@@ -1,7 +1,6 @@
 package com.ruskonert.GamblKing.framework;
 
 import com.ruskonert.GamblKing.entity.Room;
-import com.ruskonert.GamblKing.entity.Player;
 
 public class RoomFramework implements Room
 {
@@ -9,13 +8,13 @@ public class RoomFramework implements Room
     @Override public String getName() { return this.name; }
     public void setName(String name) { this.name = name; }
 
-    private Player leader;
-    @Override public Player getLeader() { return leader; }
-    public void setLeader(Player player) { this.leader = player; }
+    private String leaderName;
+    @Override public String getLeaderName() { return leaderName; }
+    public void setLeader(String name) { this.leaderName = name; }
 
-    private Player waitPlayer;
-    @Override public Player getWaitPlayer() { return this.waitPlayer; }
-    public void setWaitPlayer(Player player) { this.waitPlayer = player; }
+    private String waitPlayerName;
+    @Override public String getWaitPlayerName() { return this.waitPlayerName; }
+    public void setWaitPlayer(String name) { this.waitPlayerName = name; }
 
     private String createDate = null;
     @Override public String getCreateDate() { return this.createDate; }
@@ -23,12 +22,6 @@ public class RoomFramework implements Room
 
     @Override public synchronized void close()
     {
-
-    }
-
-    public void update()
-    {
-
     }
 
 
@@ -37,11 +30,11 @@ public class RoomFramework implements Room
 
     }
 
-    public static Room generate(Player player, String name)
+    public static Room generate(String playername, String name)
     {
         RoomFramework framework = new RoomFramework();
         framework.name = name;
-        framework.leader = player;
+        framework.leaderName = playername;
         return framework;
     }
 }

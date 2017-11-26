@@ -1,15 +1,9 @@
 package com.ruskonert.GamblKing.adapter;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-
+import com.google.gson.*;
 import com.ruskonert.GamblKing.entity.Player;
 import com.ruskonert.GamblKing.framework.PlayerEntityFramework;
+import com.ruskonert.GamblKing.framework.RoomFramework;
 
 import java.lang.reflect.Type;
 
@@ -27,6 +21,9 @@ public class PlayerAdapter implements JsonSerializer<Player>, JsonDeserializer<P
         entityFramework.setHostAddress(object.get("hostAddress").getAsString());
         entityFramework.setLastConnected(object.get("lastConnected").getAsString());
         entityFramework.setPassword(object.get("password").getAsString());
+
+        RoomFramework framework = new Gson().fromJson(object.get("enteredRoom").getAsString(), RoomFramework.class);
+        entityFramework.setEnteredRoom(framework);
         return entityFramework;
     }
 
@@ -42,6 +39,10 @@ public class PlayerAdapter implements JsonSerializer<Player>, JsonDeserializer<P
         element.addProperty("lastConnected", src.getLastConnected());
         element.addProperty("lastBattlePlayer", src.getLastBattlePlayer());
         element.addProperty("hostAddress", src.getHostAddress());
+
+        RoomFramework framework = src.getEnteredRoom();
+
+        element.addProperty("enteredRoom", framework == null ? null : new Gson().toJson(framework));
         return element;
     }
 }

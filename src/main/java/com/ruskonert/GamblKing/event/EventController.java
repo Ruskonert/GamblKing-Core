@@ -52,10 +52,19 @@ public final class EventController implements EventHandler
         {
             for(EventEntry<EventListener, Method> entry :EVENT_HANDLER_COLLECTION.get(eventTarget.getClass())) {
                 try {
-                    entry.getValue().invoke(entry.getKey(), eventTarget);
+                    try {
+                        if(eventTarget.getClass().getName().equalsIgnoreCase(entry.getValue().getParameters()[0].getType().getName()))
+                            entry.getValue().invoke(entry.getKey(), eventTarget);
+                    }
+                    catch(IllegalArgumentException e2)
+                    {
+                        e2.printStackTrace();
+                        // 이것은 해당 이벤트 메소드에 해당사항이 없음을 의미합니다.
+                        continue;
+                    }
                 }
                 catch (IllegalAccessException | InvocationTargetException e) {
-                    throw new EventExecption(e);
+                    continue;
                 }
             }
         }

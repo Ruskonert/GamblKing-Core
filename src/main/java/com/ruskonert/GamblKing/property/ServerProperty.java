@@ -2,11 +2,6 @@ package com.ruskonert.GamblKing.property;
 
 import com.ruskonert.GamblKing.connect.Packet;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 /**
  * 서버에서 사용되는 시스템 값을 정의한 클래스입니다
  * 또한 서버와 클라이언트가 특정 패킷을 이용할 때, 그 패킷의 규격을 번호로 나타냅니다.
@@ -24,7 +19,6 @@ public final class ServerProperty
     public static final String SERVER_ADDRESS            = "localhost";
     public static final int    SERVER_PORT               = 7743;
     public static final int    SERVER_UPDATE_PORT        = 7744;
-
 
     public static final int CHECK_REGISTER_CONNECTION    = 400;
     public static final int CLIENT_SERVER_REQUEST        = 401;
@@ -48,14 +42,15 @@ public final class ServerProperty
 
     // 플레이어가 보낸 메세지를 관할하는 패킷 넘버입니다.
     public static final int PLAYER_MESSAGE_RECEIVED      = 1100;
-
-
+    public static final int PLAYER_REFRESH               = 1301;
 
     public static final int ROOM_CREATE                  = 1200;
     public static final int ROOM_ACCESS                  = 1201;
     public static final int ROOM_QUIT                    = 1202;
     public static final int ROOM_REFRESH                 = 1203;
-
+    public static final int ROOM_UPDATE                  = 1204;
+    public static final int ROOM_CONNECTED               = 1205;
+    public static final int ROOM_CLOSE                   = 1206;
 
     public static final int CLIENT_FILE_REQUEST          = 300;
     public static final int CLIENT_FILE_RECEIVED         = 301;

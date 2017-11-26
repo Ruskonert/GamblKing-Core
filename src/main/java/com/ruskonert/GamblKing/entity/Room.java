@@ -4,9 +4,9 @@ public interface Room
 {
     String getName();
 
-    Player getLeader();
+    String getLeaderName();
 
-    Player getWaitPlayer();
+    String getWaitPlayerName();
 
     String getCreateDate();
 
